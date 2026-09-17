@@ -1,36 +1,37 @@
 <!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0b1119">
-  <title>前线基地 · 单机策略游戏</title>
-  <meta name="description" content="建立兵营，生产步兵，清除中立防御阵地。">
-  <link rel="stylesheet" href="style.css">
+<head>  
+<meta charset="utf-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">  
+<meta name="theme-color" content="#0b1119">  
+<title>前线基地 · 单机策略游戏</title>  
+<meta name="description" content="建立兵营，生产步兵，清除中立防御阵地。">  
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <div class="app">
-    <header class="topbar">
-      <div class="brand"><span class="brand-mark">◆</span><div><strong>前线基地</strong><small>FRONTIER OUTPOST / 01</small></div></div>
-      <div class="top-stats"><span class="stat">资源 <b id="credits">0</b></span><span class="stat">中立目标 <b id="enemy-count">0</b></span><span class="stat">战况 <b id="status">进行中</b></span></div>
-      <div class="top-actions"><button id="pause-btn" type="button">暂停</button><button id="restart-btn" type="button">重开</button></div>
-    </header>
-    <main class="main">
-      <section class="game-area" aria-label="游戏地图">
-        <div class="canvas-wrap"><canvas id="game" width="960" height="608" aria-label="前线基地游戏地图"></canvas><div class="scanline" aria-hidden="true"></div></div>
-        <div class="map-footer"><span>作战区域 / 灰烬平原</span><span id="map-hint">选择基地，再建造兵营</span></div>
-      </section>
-      <aside class="sidebar">
-        <div class="panel objective"><div class="eyebrow">任务目标</div><h1>清除中立阵地</h1><p>建造兵营，生产步兵，消灭地图上的所有中立单位。保护你的基地。</p><div class="progress-track"><span id="mission-progress"></span></div><small id="mission-text">目标 0 / 0</small></div>
-        <div class="panel selection"><div class="eyebrow">当前选择</div><h2 id="selected-name">未选择</h2><p id="selected-info">点击基地、兵营或步兵查看信息。</p><div class="health-track"><span id="selected-health"></span></div><small id="selected-hp">—</small></div>
-        <div class="panel controls"><div class="eyebrow">战术指令</div><button id="build-btn" class="action primary" type="button">建造兵营 <span>180</span></button><button id="train-btn" class="action" type="button">生产步兵 <span>70</span></button><div id="train-progress" class="train-progress"><span></span></div><div class="command-row"><button id="select-btn" class="mode active" type="button">选择</button><button id="move-btn" class="mode" type="button">移动</button><button id="attack-btn" class="mode" type="button">攻击</button></div><p id="action-help">点击建筑或步兵进行选择。</p></div>
-        <div class="panel help"><div class="eyebrow">操作指南</div><p><b>电脑：</b>左键选择或拖框；右键地面移动，右键敌人攻击。</p><p><b>触屏：</b>点选单位，再点“移动”或“攻击”，最后点地图目标。</p></div>
-      </aside>
-    </main>
-    <div id="toast" class="toast" role="status" aria-live="polite"></div>
-    <div id="overlay" class="overlay hidden"><div class="overlay-card"><div class="eyebrow" id="overlay-kicker">任务结束</div><h2 id="overlay-title">胜利</h2><p id="overlay-text"></p><button id="overlay-restart" class="action primary" type="button">重新开始</button></div></div>
-    <div id="rotate" class="rotate"><div>↻</div><strong>请横屏游玩</strong><p>横屏可以完整显示战场和操作按钮。</p></div>
-  </div>
-  <script src="game.js" defer></script>
+<body>  
+<div class="app">    
+<header class="topbar">      
+<div class="brand"><span class="brand-mark">◆</span><div><strong>前线基地</strong><small>FRONTIER OUTPOST / 01</small></div></div>      
+<div class="top-stats"><span class="stat">资源 <b id="credits">0</b></span><span class="stat">中立目标 <b id="enemy-count">0</b></span><span class="stat">战况 <b id="status">进行中</b></span></div>      
+<div class="top-actions"><button id="pause-btn" type="button">暂停</button><button id="restart-btn" type="button">重开</button></div>    
+</header>    
+<main class="main">      
+<section class="game-area" aria-label="游戏地图">        
+<div class="canvas-wrap"><canvas id="game" width="960" height="608" aria-label="前线基地游戏地图"></canvas><div class="scanline" aria-hidden="true"></div></div>        
+<div class="map-footer"><span>作战区域 / 灰烬平原</span><span id="map-hint">选择基地，再建造兵营</span></div>      
+</section>      
+<aside class="sidebar">        
+<div class="panel objective"><div class="eyebrow">任务目标</div><h1>清除中立阵地</h1><p>建造兵营，生产步兵，消灭地图上的所有中立单位。保护你的基地。</p><div class="progress-track"><span id="mission-progress"></span></div><small id="mission-text">目标 0 / 0</small></div>        
+<div class="panel selection"><div class="eyebrow">当前选择</div><h2 id="selected-name">未选择</h2><p id="selected-info">点击基地、兵营或步兵查看信息。</p><div class="health-track"><span id="selected-health"></span></div><small id="selected-hp">—</small></div>        
+<div class="panel controls"><div class="eyebrow">战术指令</div><button id="build-btn" class="action primary" type="button">建造兵营 <span>180</span></button><button id="train-btn" class="action" type="button">生产步兵 <span>70</span></button><div id="train-progress" class="train-progress"><span></span></div><div class="command-row"><button id="select-btn" class="mode active" type="button">选择</button><button id="move-btn" class="mode" type="button">移动</button><button id="attack-btn" class="mode" type="button">攻击</button></div><p id="action-help">点击建筑或步兵进行选择。</p></div>        
+<div class="panel help"><div class="eyebrow">操作指南</div><p><b>电脑：</b>左键选择或拖框；右键地面移动，右键敌人攻击。</p><p><b>触屏：</b>点选单位，再点“移动”或“攻击”，最后点地图目标。</p></div>      
+</aside>    
+</main>    
+<div id="toast" class="toast" role="status" aria-live="polite"></div>    
+<div id="overlay" class="overlay hidden"><div class="overlay-card"><div class="eyebrow" id="overlay-kicker">任务结束</div><h2 id="overlay-title">胜利</h2><p id="overlay-text"></p><button id="overlay-restart" class="action primary" type="button">重新开始</button></div></div>    
+<div id="rotate" class="rotate"><div>↻</div><strong>请横屏游玩</strong><p>横屏可以完整显示战场和操作按钮。</p></div>  
+</div>  
+<script src="game.js" defer></script>
 </body>
 </html>

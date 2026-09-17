@@ -55,6 +55,11 @@ function drag(x1, y1, x2, y2) {
   pointer('pointermove', x2, y2);
   pointer('pointerup', x2, y2);
 }
+function rightClick(x, y) {
+  handlers.get('contextmenu')({preventDefault: noOp,
+    clientX: rect.left + x * rect.width / 960,
+    clientY: rect.top + y * rect.height / 608});
+}
 
 assert.equal(state().credits, 470);
 assert.equal(state().enemies.length, 5);
@@ -65,6 +70,12 @@ assert.match(element('toast').textContent, /无法建造/);
 tap(256, 304);
 assert.equal(state().barracks.length, 1);
 assert.equal(state().credits, 290);
+click('build-btn');
+tap(256, 304);
+tap(944, 590);
+assert.equal(state().barracks.length, 1, 'building and map edge block construction');
+rightClick(256, 304);
+assert.equal(state().placing, false, 'right click cancels placement');
 click('train-btn'); click('train-btn'); click('train-btn'); click('train-btn');
 assert.equal(state().barracks[0].queue, 4);
 assert.equal(state().credits, 10);
@@ -81,6 +92,8 @@ tick(11);
 assert.equal(state().soldiers.length, 4, 'four soldiers spawn');
 assert.equal(state().barracks[0].queue, 0);
 assert.equal(new Set(state().soldiers.map(s => `${s.x},${s.y}`)).size, 4, 'spawns are dispersed');
+tap(state().soldiers[0].x, state().soldiers[0].y, 'touch');
+assert.equal(state().selection.length, 1, 'touch selects a soldier');
 
 drag(280, 220, 440, 420);
 assert.ok(state().selection.length >= 2, 'drag selects multiple soldiers');
@@ -93,6 +106,8 @@ assert.equal(state().mode, 'select');
 assert.ok(selected.some(s => s.path.length), 'touch move command sets a route after resize');
 tick(1.5);
 assert.ok(selected.some((s, i) => Math.hypot(s.x - prior[i][0], s.y - prior[i][1]) > 20), 'units move');
+rightClick(560, 280);
+assert.ok(selected.some(s => s.path.length), 'right click also issues a move command');
 
 click('attack-btn');
 tap(783, 110, 'touch');

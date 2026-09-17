@@ -2,6 +2,10 @@
 
 一款原创的单机 2D 基地建设小游戏。建立兵营、生产步兵并清除五个中立目标。游戏完全在浏览器中运行，不需要账号、后端或网络资源。
 
+在线游玩：https://laurelin11.github.io/frontier-outpost/
+
+项目仓库：https://github.com/laurelin11/frontier-outpost
+
 ## 本地运行
 
 双击本目录的 index.html，用 Chrome、Safari 或其他现代浏览器打开即可。也可以把整个目录放进任意静态网页服务器。三个运行文件 index.html、style.css、game.js 必须保持在同一目录。
@@ -15,20 +19,20 @@
 
 资源会自动增长。兵营花费 180，步兵花费 70。清除全部中立目标获胜；基地被摧毁则失败。
 
-## 发布到 GitHub Pages
+## 更新与重新发布
 
-1. 登录 GitHub，创建一个公开仓库，例如 frontier-outpost。
-2. 将 index.html、style.css、game.js、README.md 上传到仓库根目录。
-3. 打开仓库 Settings → Pages。在 Build and deployment 中选择 Deploy from a branch，选择 main 分支及 / (root)，保存。
-4. 等待 Pages 发布完成，在设置页打开生成的网址。网址通常为 https://你的用户名.github.io/frontier-outpost/ 。不要把示例地址当作已经发布的链接。
-5. 在真实网址检查页面、建造、生产、移动、攻击和手机横屏布局，然后将这个网址发给朋友。
+1. 在本地修改对应文件并测试。运行 `node tests/smoke.cjs` 可以复查核心游戏流程。
+2. 把修改后的文件提交到 [frontier-outpost 仓库](https://github.com/laurelin11/frontier-outpost) 的 `main` 分支。可直接在 GitHub 网页上编辑文件并提交。
+3. 仓库的 GitHub Pages 已设置为从 `main` 分支的根目录发布。提交后等待部署完成，刷新上面的在线地址验证改动。
+4. 如需检查或重新启用发布，打开仓库 Settings → Pages，确认 Source 为 Deploy from a branch、分支为 `main`、目录为 `/ (root)`，然后保存。
 
-更新游戏时，修改并重新上传相应文件到同一个分支；GitHub Pages 会重新发布。
+如果浏览器还显示旧版，先强制刷新页面。
 
 ## 文件
 
 - index.html：页面结构
 - style.css：界面与响应式布局
 - game.js：游戏状态、输入、寻路、战斗与绘制
+- tests/smoke.cjs：可重复的核心玩法验收脚本
 
 所有画面由 Canvas 和 CSS 绘制，没有使用第三方游戏素材。
